@@ -10,36 +10,34 @@ SKU = {
 }
 
 SPECIAL_OFFERS = {
-    'A': [
-        {
-            'num': 3,
-            'type': 'discount',
-            'value': 130,
-            'saving': 20
-        },
-        {
-            'num': 5,
-            'type': 'discount',
-            'value': 200,
-            'saving': 50
-        }
-    ],
-    'B': [
-        {
-            'num': 2,
-            'type': 'discount',
-            'value': 45,
-            'saving': 15
-        }
-    ],
-    'E': [
-        {
-            'num': 2,
-            'type': 'free',
-            'value': 'B',
-            'saving': SKU['B']
-        }
-    ]
+    {
+        'target': 'A',
+        'num': 3,
+        'type': 'discount',
+        'value': 130,
+        'saving': 20
+    },
+    {
+        'target': 'A',
+        'num': 5,
+        'type': 'discount',
+        'value': 200,
+        'saving': 50
+    },
+    {
+        'target': 'B',
+        'num': 2,
+        'type': 'discount',
+        'value': 45,
+        'saving': 15
+    },
+    {
+        'target': 'E',
+        'num': 2,
+        'type': 'free',
+        'value': 'B',
+        'saving': SKU['B']
+    }
 }
 
 
@@ -92,13 +90,13 @@ def calculate_special_offers(items, total):
     """
     Add special offers to total and remove items in offers
     """
-    for item in SPECIAL_OFFERS:
-        # Get offers largest to smallest and apply them
-        for offer in sorted(SPECIAL_OFFERS[item], key=lambda x: x['saving'], reverse=True):
-            if offer.get('type', '') == 'discount':
-                total += discount_offer(items, item, offer)
-            if offer.get('type', '') == 'free':
-                total += get_free_offer(items, item, offer)
+    # Get offers largest to smallest and apply them
+    for offer in sorted(SPECIAL_OFFERS, key=lambda x: x['saving'], reverse=True):
+        item = offer['target']
+        if offer.get('type', '') == 'discount':
+            total += discount_offer(items, item, offer)
+        if offer.get('type', '') == 'free':
+            total += get_free_offer(items, item, offer)
     
     return total
 
