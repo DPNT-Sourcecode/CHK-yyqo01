@@ -48,10 +48,10 @@ class TestSum(unittest.TestCase):
         ('FFFF', 30), 
         ('FFFFFF', 40)
     ])
-    def test_chk_get_free_same_item(self):
+    def test_chk_get_free_same_item(self, skus, value):
         self.assertEqual(
-            checkout_solution.checkout('FFF'), 
-            20)
+            checkout_solution.checkout(skus), 
+            value)
     
     def test_chk_get_free_multiple_offers_same_item(self):
         self.assertEqual(

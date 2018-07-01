@@ -85,7 +85,7 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
-        free_items = items[item] / offer['num']
+        free_items = items[item] / (offer['num'] + 1)
         free_item_key = offer['value']
         if items[free_item_key] > 0:
             reduce_by = min(items[free_item_key], free_items)
