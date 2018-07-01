@@ -120,9 +120,18 @@ class TestCheckout(unittest.TestCase):
         ('XXX', 45),
         ('XYZ', 45),
         ('XYZXXX', 90),
-        ('STX', 45)
+        ('STX', 45),
+        ('ST', 40),
     ])
     def test_chk_any_3(self, skus, val):
+        self.assertEqual(
+            checkout_solution.checkout(skus), val)
+    
+    @parameterized.expand([
+        ('AAAXXX', 175),
+        ('AAAAASTX', 245),
+    ])
+    def test_chk_any_3_combo(self, skus, val):
         self.assertEqual(
             checkout_solution.checkout(skus), val)
 
