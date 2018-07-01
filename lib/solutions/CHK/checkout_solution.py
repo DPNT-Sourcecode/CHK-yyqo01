@@ -185,6 +185,7 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
+        import pdb;pdb.set_trace()
         free_item_key = offer['value']
         required_items = get_required_offer_items(item, offer)
         free_items = items[item] / required_items

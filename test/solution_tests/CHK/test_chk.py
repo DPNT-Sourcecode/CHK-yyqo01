@@ -17,18 +17,21 @@ class TestSum(unittest.TestCase):
         self.assertEqual(
             checkout_solution.checkout(fail_char), -1)
     
-    def test_chk_special_offers(self):
+    @parameterized.expand([
+        ('HHHHH', 45),
+        ('HHHHHHHHH', 85),
+        ('AAABBCD', 210)
+    ])
+    def test_chk_special_offers(self, skus, value):
         self.assertEqual(
-            checkout_solution.checkout('AAABBCD'), 
-            210)
+            checkout_solution.checkout(skus), value)
     
     @parameterized.expand([
         ('AAAAAAAABBCDE', 450),
-        ('HHHHH', 45),
-        ('HHHHHHHHH', 85),
         ('AAAAAAAABBCDEHHHHHHHH', 535)
     ])
     def test_chk_multiple_special_offers(self, skus, value):
+        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout(skus), value)
     
