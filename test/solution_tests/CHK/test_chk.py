@@ -30,7 +30,7 @@ class TestSum(unittest.TestCase):
     def test_chk_get_free(self):
         self.assertEqual(
             checkout_solution.checkout('AAAAAAAABBCDEE'), 
-            490)
+            460)
     
     @parameterized.expand([
         ('A', 50),
