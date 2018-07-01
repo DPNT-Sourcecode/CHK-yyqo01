@@ -1,4 +1,24 @@
 
+# Stock keeping units
+SKU = {
+    'A': 50,
+    'B': 30,
+    'C': 20,
+    'D': 15
+}
+
+SPECIAL_OFFERS = {
+    'A': {
+        'num': 3,
+        'amount': 130
+    },
+    'B': {
+        'num': 2,
+        'amount': 45
+    }
+}
+
+
 def valid_input(chars):
     """
     Check input is of type string and limited to characters:
@@ -12,7 +32,13 @@ def valid_input(chars):
             return False
 
     return False
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    raise NotImplementedError()
+    if not valid_input:
+        return -1
+    
+    total = 0
+
