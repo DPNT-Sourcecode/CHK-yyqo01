@@ -34,7 +34,6 @@ class TestSum(unittest.TestCase):
             value)
     
     def test_chk_empty_string(self):
-        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout(''), 
             0)
