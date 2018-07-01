@@ -186,7 +186,7 @@ def valid_input(chars):
 def _get_most_valuable_group_items(items, num):
     group_item_keys = ['S', 'T', 'X', 'Y', 'Z']
     group_items = []
-    for item in items:
+    for item in [x for x in group_item_keys if x in group_item_keys]:
         for x in range(items[item]):
             group_items.append((item, SKU[item]))
 
