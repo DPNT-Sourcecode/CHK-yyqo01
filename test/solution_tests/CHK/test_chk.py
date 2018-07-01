@@ -35,6 +35,10 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(
             checkout_solution.checkout(skus), value)
     
+    def test_test(self):
+        self.assertEqual(
+            checkout_solution.checkout('AAAAAAAABBCDEHHHHHHHH'), 535)
+    
     def test_chk_get_free(self):
         self.assertEqual(
             checkout_solution.checkout('ABCDEE'), 
