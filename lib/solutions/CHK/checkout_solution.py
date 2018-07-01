@@ -42,13 +42,13 @@ SPECIAL_OFFERS = {
 def valid_input(chars):
     """
     Check input is of type string and limited to characters:
-    A B C D
+    A B C D E
     """
     if not isinstance(chars, basestring):
         return False
     
     for ch in chars:
-        if ch not in ['A', 'B', 'C', 'D']:
+        if ch not in SKU.keys():
             return False
 
     return True
@@ -63,7 +63,7 @@ def discount_offer(items, item, offer):
     if items[item] >= offer['num']:
         offer_count = items[item] / offer['num']
         items[item] = items[item] % offer['num']
-        amount = offer_count * offer['amount']
+        amount = offer_count * offer['value']
     
     return amount
 
@@ -88,7 +88,6 @@ def calculate_special_offers(items, total):
     """
     for item in SPECIAL_OFFERS:
         # Get offers largest to smallest and apply them
-        import pdb;pdb.set_trace()
         for offer in sorted(SPECIAL_OFFERS[item], key=lambda x: x['num'], reverse=True):
             if offer.get('type', '') == 'discount':
                 total += discount_offer(items, item, offer)

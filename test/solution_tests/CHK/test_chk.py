@@ -22,11 +22,22 @@ class TestSum(unittest.TestCase):
             checkout_solution.checkout('AAABBCD'), 
             210)
     
+    def test_chk_multiple_special_offers(self):
+        self.assertEqual(
+            checkout_solution.checkout('AAAAAAAABBCDE'), 
+            450)
+    
+    def test_chk_get_free(self):
+        self.assertEqual(
+            checkout_solution.checkout('AAAAAAAABBCDEE'), 
+            480)
+    
     @parameterized.expand([
         ('A', 50),
         ('B', 30), 
         ('C', 20), 
-        ('D', 15)
+        ('D', 15),
+        ('E', 40)
     ])
     def test_chk_single_values(self, char, value):
         self.assertEqual(
