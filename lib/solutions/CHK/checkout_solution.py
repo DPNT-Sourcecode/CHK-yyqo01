@@ -4,18 +4,37 @@ SKU = {
     'A': 50,
     'B': 30,
     'C': 20,
-    'D': 15
+    'D': 15,
+    'E': 40
 }
 
 SPECIAL_OFFERS = {
-    'A': {
-        'num': 3,
-        'amount': 130
-    },
-    'B': {
-        'num': 2,
-        'amount': 45
-    }
+    'A': [
+        {
+            'num': 3,
+            'type': 'discount',
+            'value': 130
+        },
+        {
+            'num': 5,
+            'type': 'discount',
+            'value': 200
+        }
+    ],
+    'B': [
+        {
+            'num': 2,
+            'type': 'discount',
+            'value': 45
+        }
+    ],
+    'E': [
+        {
+            'num': 2,
+            'type': 'BOGOF',
+            'value': 'E'
+        }
+    ]
 }
 
 
@@ -50,7 +69,8 @@ def checkout(skus):
         'A': 0,
         'B': 0,
         'C': 0,
-        'D': 0
+        'D': 0,
+        'E': 0
     }
 
     # Calculate skus found
