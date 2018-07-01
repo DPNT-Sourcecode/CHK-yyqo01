@@ -28,12 +28,11 @@ def valid_input(chars):
     if not isinstance(chars, str):
         return False
     
-    import pdb;pdb.set_trace()
     for ch in chars:
         if ch not in ['A', 'B', 'C', 'D']:
             return False
 
-    return False
+    return True
 
 
 # noinspection PyUnusedLocal
@@ -63,10 +62,10 @@ def checkout(skus):
 
     # Add special offers to total and remove items in offers
     for item in SPECIAL_OFFERS:
-        if items[item] > SPECIAL_OFFERS[item]['num']:
+        if items[item] >= SPECIAL_OFFERS[item]['num']:
             offer_count = items[item] / SPECIAL_OFFERS[item]['num']
             items[item] = items[item] % SPECIAL_OFFERS[item]['num']
-            total = offer_count * SPECIAL_OFFERS['amount']
+            total += offer_count * SPECIAL_OFFERS[item]['amount']
     
     for item in items:
         total += items[item] * SKU[item]
