@@ -28,16 +28,19 @@ class TestSum(unittest.TestCase):
             450)
     
     def test_chk_get_free(self):
-        import pdb;pdb.set_trace()
         self.assertEqual(
-            checkout_solution.checkout('AAAAAAAABBCDEE'), 
-            460)
+            checkout_solution.checkout('ABCDEE'), 
+            165)
+    
+    def test_chk_get_2_free(self):
+        self.assertEqual(
+            checkout_solution.checkout('ABBCDEEEE'), 
+            245)
     
     def test_chk_get_free_multiple_offers(self):
-        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout('AAAAAAAABBCDEE'), 
-            460)
+            475)
     
     @parameterized.expand([
         ('A', 50),
