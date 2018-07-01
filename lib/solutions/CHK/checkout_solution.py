@@ -264,17 +264,26 @@ def calculate_special_offers(items, total):
     def sort_offers(items, offers):
         return sorted(offers, key=lambda x: x['saving'], reverse=True)
     
+    def apply_offer(items, item, offer):
+        amount = 0
+        item = offer['target']
+        if offer.get('type', '') == 'discount':
+            amount += discount_offer(items, item, offer)
+        if offer.get('type', '') == 'free':
+            amount += get_free_offer(items, item, offer)
+        if offer.get('type', '') == 'group_discount':
+            amount += get_group_discount(items, item, offer)
+        return amount
+    
     # Get offers largest to smallest savings and apply them
     offers = sort_offers(items, get_special_offers(items))
     while offers:
         offer = offers[0]
         item = offer['target']
-        if offer.get('type', '') == 'discount':
-            total += discount_offer(items, item, offer)
-        if offer.get('type', '') == 'free':
-            total += get_free_offer(items, item, offer)
-        if offer.get('type', '') == 'group_discount':
-            total += get_group_discount(items, item, offer)
+        amount = apply_offer(items, item, offer)
+        while amount:
+            total += amount
+            amount = apply_offer(items, item, offer)
         offers.pop(0)
         # Recalculate offers to update group offers
         offers = sort_offers(items, update_special_offers(items, offers))
