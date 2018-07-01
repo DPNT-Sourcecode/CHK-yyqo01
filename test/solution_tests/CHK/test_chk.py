@@ -28,6 +28,7 @@ class TestSum(unittest.TestCase):
             450)
     
     def test_chk_get_free(self):
+        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout('AAAAAAAABBCDEE'), 
             460)

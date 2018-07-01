@@ -33,7 +33,7 @@ SPECIAL_OFFERS = {
         {
             'num': 2,
             'type': 'free',
-            'value': 'E'
+            'value': 'B'
         }
     ]
 }
@@ -58,7 +58,6 @@ def discount_offer(items, item, offer):
     """
     Add discounted items and remove them once added
     """
-    import pdb;pdb.set_trace()
     amount = 0
 
     if items[item] >= offer['num']:
