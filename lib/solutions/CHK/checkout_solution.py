@@ -37,6 +37,12 @@ def valid_input(chars):
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    """
+    Calculate total value of Stock Keeping Units for string of characters
+    representing units
+
+    @param skus: (String) string of letters must be of value 'ABCD'
+    """
     if not valid_input:
         return -1
     
