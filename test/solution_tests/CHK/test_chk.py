@@ -120,6 +120,7 @@ class TestCheckout(unittest.TestCase):
         ('XXX', 45),
         ('XYZ', 45),
         ('XYZXXX', 90),
+        ('STX', 45)
     ])
     def test_chk_any_3(self, skus, val):
         self.assertEqual(

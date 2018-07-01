@@ -147,7 +147,35 @@ def get_special_offers(items):
             'saving': 20
         },
         {
+            'target': 'S',
+            'num': 3,
+            'type': 'group_discount',
+            'value': group_value,
+            'saving': group_savings
+        },
+        {
+            'target': 'T',
+            'num': 3,
+            'type': 'group_discount',
+            'value': group_value,
+            'saving': group_savings
+        },
+        {
             'target': 'X',
+            'num': 3,
+            'type': 'group_discount',
+            'value': group_value,
+            'saving': group_savings
+        },
+        {
+            'target': 'Y',
+            'num': 3,
+            'type': 'group_discount',
+            'value': group_value,
+            'saving': group_savings
+        },
+        {
+            'target': 'Z',
             'num': 3,
             'type': 'group_discount',
             'value': group_value,
@@ -281,6 +309,7 @@ def calculate_special_offers(items, total):
         offer = offers[0]
         item = offer['target']
         amount = apply_offer(items, item, offer)
+        # Keep applying best offer until it cannot be applied any more
         while amount:
             total += amount
             amount = apply_offer(items, item, offer)
