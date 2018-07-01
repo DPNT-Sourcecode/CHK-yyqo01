@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 # Stock keeping units
 SKU = {
@@ -53,6 +54,17 @@ def valid_input(chars):
     return True
 
 
+def calculate_special_offers(items, total):
+     # Add special offers to total and remove items in offers
+    for item in SPECIAL_OFFERS:
+        if items[item] >= SPECIAL_OFFERS[item]['num']:
+            offer_count = items[item] / SPECIAL_OFFERS[item]['num']
+            items[item] = items[item] % SPECIAL_OFFERS[item]['num']
+            total += offer_count * SPECIAL_OFFERS[item]['amount']
+    
+    return total
+
+
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
@@ -65,6 +77,7 @@ def checkout(skus):
     if not valid_input(skus):
         return -1
     
+    total = 0
     items = {
         'A': 0,
         'B': 0,
@@ -76,15 +89,8 @@ def checkout(skus):
     # Calculate skus found
     for char in skus:
         items[char] += 1
-    
-    total = 0
-
-    # Add special offers to total and remove items in offers
-    for item in SPECIAL_OFFERS:
-        if items[item] >= SPECIAL_OFFERS[item]['num']:
-            offer_count = items[item] / SPECIAL_OFFERS[item]['num']
-            items[item] = items[item] % SPECIAL_OFFERS[item]['num']
-            total += offer_count * SPECIAL_OFFERS[item]['amount']
+        
+    total = calculate_special_offers(items, total)
     
     for item in items:
         total += items[item] * SKU[item]
