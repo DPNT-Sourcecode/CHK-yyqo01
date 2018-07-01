@@ -65,7 +65,42 @@ SPECIAL_OFFERS = [
         'type': 'free',
         'value': 'F',
         'saving': SKU['F']
-    }
+    },
+    {
+        'target': 'H',
+        'num': 5,
+        'type': 'discount',
+        'value': 45,
+        'saving': 5
+    },
+    {
+        'target': 'H',
+        'num': 10,
+        'type': 'discount',
+        'value': 80,
+        'saving': 20
+    },
+    {
+        'target': 'K',
+        'num': 2,
+        'type': 'discount',
+        'value': 150,
+        'saving': 10
+    },
+    {
+        'target': 'N',
+        'num': 3,
+        'type': 'free',
+        'value': 'M',
+        'saving': 15
+    },
+    {
+        'target': 'P',
+        'num': 5,
+        'type': 'discount',
+        'value': 200,
+        'saving': 50
+    },
 ]
 
 
