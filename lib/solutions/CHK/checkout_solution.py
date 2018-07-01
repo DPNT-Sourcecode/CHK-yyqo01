@@ -185,15 +185,17 @@ def valid_input(chars):
 
 def _get_most_valuable_group_items(items, num):
     group_item_keys = ['S', 'T', 'X', 'Y', 'Z']
-    group_items = [(key, value) for key, value in items.iteritems() 
-        if key in group_item_keys and value > 0]
-    
-    return sorted(group_items, key=lambda x:SKU[x[0]], reverse=True)[:num]
+    group_items = []
+    for item in items:
+        for x in range(items[item]):
+            group_items.append((item, SKU[item]))
+
+    return sorted(group_items, key=lambda x:x[1], reverse=True)[:num]
 
 
 def get_group_value(items, num):
     group_items = _get_most_valuable_group_items(items, num)
-    return sum([x[1] * SKU[x[0]] for x in group_items])
+    return sum([x[1] for x in group_items])
 
 
 def get_group_savings(items, num):
