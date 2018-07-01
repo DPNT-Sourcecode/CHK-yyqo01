@@ -14,26 +14,30 @@ SPECIAL_OFFERS = {
         {
             'num': 3,
             'type': 'discount',
-            'value': 130
+            'value': 130,
+            'saving': 20
         },
         {
             'num': 5,
             'type': 'discount',
-            'value': 200
+            'value': 200,
+            'saving': 50
         }
     ],
     'B': [
         {
             'num': 2,
             'type': 'discount',
-            'value': 45
+            'value': 45,
+            'saving': 15
         }
     ],
     'E': [
         {
             'num': 2,
             'type': 'free',
-            'value': 'B'
+            'value': 'B',
+            'saving': SKU['B']
         }
     ]
 }
@@ -90,7 +94,7 @@ def calculate_special_offers(items, total):
     """
     for item in SPECIAL_OFFERS:
         # Get offers largest to smallest and apply them
-        for offer in sorted(SPECIAL_OFFERS[item], key=lambda x: x['num'], reverse=True):
+        for offer in sorted(SPECIAL_OFFERS[item], key=lambda x: x['saving'], reverse=True):
             if offer.get('type', '') == 'discount':
                 total += discount_offer(items, item, offer)
             if offer.get('type', '') == 'free':
