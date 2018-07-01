@@ -200,6 +200,7 @@ def get_group_savings(items, num):
 
 
 def get_group_discount(items, item, offer):
+    import pdb;pdb.set_trace()
     amount = 0
     group_items = _get_most_valuable_group_items(items, 3)
 
@@ -242,6 +243,7 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
+        import pdb;pdb.set_trace()
         free_item_key = offer['value']
         required_items = get_required_offer_items(item, offer)
         free_items = items[item] / required_items
@@ -271,7 +273,7 @@ def calculate_special_offers(items, total):
         if offer.get('type', '') == 'free':
             total += get_free_offer(items, item, offer)
         if offer.get('type', '') == 'group_discount':
-            total += get_free_offer(items, item, offer)
+            total += get_group_discount(items, item, offer)
         offers.pop(0)
         # Recalculate offers to update group offers
         offers = sort_offers(items, update_special_offers(items, offers))
