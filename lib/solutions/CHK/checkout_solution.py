@@ -30,113 +30,123 @@ SKU = {
     'Z': 50
 }
 
-SPECIAL_OFFERS = [
-    {
-        'target': 'A',
-        'num': 3,
-        'type': 'discount',
-        'value': 130,
-        'saving': 20
-    },
-    {
-        'target': 'A',
-        'num': 5,
-        'type': 'discount',
-        'value': 200,
-        'saving': 50
-    },
-    {
-        'target': 'B',
-        'num': 2,
-        'type': 'discount',
-        'value': 45,
-        'saving': 15
-    },
-    {
-        'target': 'E',
-        'num': 2,
-        'type': 'free',
-        'value': 'B',
-        'saving': SKU['B']
-    },
-    {
-        'target': 'F',
-        'num': 2,
-        'type': 'free',
-        'value': 'F',
-        'saving': SKU['F']
-    },
-    {
-        'target': 'H',
-        'num': 5,
-        'type': 'discount',
-        'value': 45,
-        'saving': 5
-    },
-    {
-        'target': 'H',
-        'num': 10,
-        'type': 'discount',
-        'value': 80,
-        'saving': 20
-    },
-    {
-        'target': 'K',
-        'num': 2,
-        'type': 'discount',
-        'value': 150,
-        'saving': 10
-    },
-    {
-        'target': 'N',
-        'num': 3,
-        'type': 'free',
-        'value': 'M',
-        'saving': SKU['M']
-    },
-    {
-        'target': 'P',
-        'num': 5,
-        'type': 'discount',
-        'value': 200,
-        'saving': 50
-    },
-    {
-        'target': 'Q',
-        'num': 3,
-        'type': 'discount',
-        'value': 80,
-        'saving': 10
-    },
-    {
-        'target': 'R',
-        'num': 3,
-        'type': 'free',
-        'value': 'Q',
-        'saving': SKU['Q']
-    },
-    {
-        'target': 'U',
-        'num': 3,
-        'type': 'free',
-        'value': 'U',
-        'saving': SKU['U']
-    },
-    {
-        'target': 'V',
-        'num': 2,
-        'type': 'discount',
-        'value': 90,
-        'saving': 10
-    },
-    {
-        'target': 'V',
-        'num': 3,
-        'type': 'discount',
-        'value': 130,
-        'saving': 20
-    }
-]
+SPECIAL_OFFERS = None
+
+def get_special_offers(items): 
+    return [
+        {
+            'target': 'A',
+            'num': 3,
+            'type': 'discount',
+            'value': 130,
+            'saving': 20
+        },
+        {
+            'target': 'A',
+            'num': 5,
+            'type': 'discount',
+            'value': 200,
+            'saving': 50
+        },
+        {
+            'target': 'B',
+            'num': 2,
+            'type': 'discount',
+            'value': 45,
+            'saving': 15
+        },
+        {
+            'target': 'E',
+            'num': 2,
+            'type': 'free',
+            'value': 'B',
+            'saving': SKU['B']
+        },
+        {
+            'target': 'F',
+            'num': 2,
+            'type': 'free',
+            'value': 'F',
+            'saving': SKU['F']
+        },
+        {
+            'target': 'H',
+            'num': 5,
+            'type': 'discount',
+            'value': 45,
+            'saving': 5
+        },
+        {
+            'target': 'H',
+            'num': 10,
+            'type': 'discount',
+            'value': 80,
+            'saving': 20
+        },
+        {
+            'target': 'K',
+            'num': 2,
+            'type': 'discount',
+            'value': 150,
+            'saving': 10
+        },
+        {
+            'target': 'N',
+            'num': 3,
+            'type': 'free',
+            'value': 'M',
+            'saving': SKU['M']
+        },
+        {
+            'target': 'P',
+            'num': 5,
+            'type': 'discount',
+            'value': 200,
+            'saving': 50
+        },
+        {
+            'target': 'Q',
+            'num': 3,
+            'type': 'discount',
+            'value': 80,
+            'saving': 10
+        },
+        {
+            'target': 'R',
+            'num': 3,
+            'type': 'free',
+            'value': 'Q',
+            'saving': SKU['Q']
+        },
+        {
+            'target': 'U',
+            'num': 3,
+            'type': 'free',
+            'value': 'U',
+            'saving': SKU['U']
+        },
+        {
+            'target': 'V',
+            'num': 2,
+            'type': 'discount',
+            'value': 90,
+            'saving': 10
+        },
+        {
+            'target': 'V',
+            'num': 3,
+            'type': 'discount',
+            'value': 130,
+            'saving': 20
+        },
+        {
+            'target': 'X',
+            'num': 3,
+            'type': 'group_discount',
+            'value': get_group_value(items),
+            'saving': get_group_savings(items)
+        }
+    ]
 
 
 def valid_input(chars):
@@ -154,9 +164,21 @@ def valid_input(chars):
     return True
 
 
+def get_group_value(items):
+    pass
+
+
+def get_group_savings(items):
+    pass
+
+
+def group_discount(items, item, offer):
+    pass
+
+
 def discount_offer(items, item, offer):
     """
-    Add discounted items and remove them once added
+    Add discounted items value and remove them once added
     """
     amount = 0
 
@@ -228,6 +250,10 @@ def checkout(skus):
     items = {
         key: 0 for key in SKU.keys()
     }
+
+    # TODO: refactor into a class
+    global SPECIAL_OFFERS
+    SPECIAL_OFFERS = get_special_offers(items)
 
     # Calculate skus found
     for char in skus:
