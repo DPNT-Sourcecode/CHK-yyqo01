@@ -55,6 +55,9 @@ def valid_input(chars):
 
 
 def discount_offer(items, item, offer):
+    """
+    Add discounted items and remove them once added
+    """
     amount = 0
 
     if items[item] >= offer['num']:
@@ -66,9 +69,18 @@ def discount_offer(items, item, offer):
 
 
 def get_free_offer(items, item, offer):
-    if items[item] >= offer['num']:
-        free_item = items[item] / offer['num']
-        items[free_item] += 1
+    """
+    Add free item this doesn't do anything as we only want the 
+    total which the free item doesn't effect
+    """
+    pass
+
+    # Normally I'd remove this but for this challenge I'll comment it out
+    # as I feel I'll need it
+    # if items[item] >= offer['num']:
+    #     free_item = items[item] / offer['num']
+    #     items[free_item] += 1
+
 
 def calculate_special_offers(items, total):
     """
@@ -76,7 +88,8 @@ def calculate_special_offers(items, total):
     """
     for item in SPECIAL_OFFERS:
         # Get offers largest to smallest and apply them
-        for offer in sorted(item, key=lambda x: x['num'], reverse=True):
+        import pdb;pdb.set_trace()
+        for offer in sorted(SPECIAL_OFFERS[item], key=lambda x: x['num'], reverse=True):
             if offer.get('type', '') == 'discount':
                 total += discount_offer(items, item, offer)
             if offer.get('type', '') == 'free':
