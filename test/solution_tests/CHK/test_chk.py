@@ -102,9 +102,9 @@ class TestCheckout(unittest.TestCase):
         ('U', 40),
         ('V', 50),
         ('W', 20),
-        ('X', 90),
-        ('Y', 10),
-        ('Z', 50)
+        ('X', 17),
+        ('Y', 20),
+        ('Z', 21)
     ])
     def test_chk_single_values(self, char, value):
         self.assertEqual(
@@ -119,10 +119,11 @@ class TestCheckout(unittest.TestCase):
     @parameterized.expand([
         ('XXX', 45),
         ('XYZ', 45),
+        ('XYZXXX', 90),
     ])
-    def test_chk_any_3(self):
+    def test_chk_any_3(self, skus, val):
         self.assertEqual(
-            checkout_solution.checkout('XXX'), 45)
+            checkout_solution.checkout(skus), val)
 
 
 if __name__ == '__main__':
