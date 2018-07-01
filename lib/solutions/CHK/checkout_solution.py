@@ -40,7 +40,7 @@ def get_special_offers(items):
     group_value = get_group_value(items, 3)
     group_savings = get_group_savings(items, 3)
 
-    SPECIAL_OFFERS = [
+    return [
         {
             'target': 'A',
             'num': 3,
@@ -237,7 +237,7 @@ def calculate_special_offers(items, total):
         return sorted(get_special_offers(items), key=lambda x: x['saving'], reverse=True)
     
     # Get offers largest to smallest savings and apply them
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
     offers = sort_offers(items)
     while offers:
         offer = offers[0]
@@ -246,7 +246,7 @@ def calculate_special_offers(items, total):
             total += discount_offer(items, item, offer)
         if offer.get('type', '') == 'free':
             total += get_free_offer(items, item, offer)
-        offers.shift()
+        offers.pop(0)
         # Recalculate offers to update group offers
         offers = sort_offers(items)
     
