@@ -24,7 +24,7 @@ def valid_input(chars):
     Check input is of type string and limited to characters:
     A B C D
     """
-    if not isinstance(chars, str):
+    if not isinstance(chars, basestring):
         return False
     
     for ch in chars:
