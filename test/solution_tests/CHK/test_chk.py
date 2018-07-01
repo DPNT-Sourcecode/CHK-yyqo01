@@ -13,6 +13,7 @@ class TestSum(unittest.TestCase):
             checkout_solution.checkout(fail_char), -1)
         
     def test_chk_special_offers(self):
+        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout('AAABBCD'), 
             210)

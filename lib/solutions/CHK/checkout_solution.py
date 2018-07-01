@@ -1,3 +1,4 @@
+# encoding: utf-8
 
 # Stock keeping units
 SKU = {
@@ -27,8 +28,9 @@ def valid_input(chars):
     if not isinstance(chars, str):
         return False
     
-    for c in chars:
-        if c not in ['A', 'B', 'C', 'D']:
+    import pdb;pdb.set_trace()
+    for ch in chars:
+        if ch not in ['A', 'B', 'C', 'D']:
             return False
 
     return False
@@ -43,7 +45,7 @@ def checkout(skus):
 
     @param skus: (String) string of letters must be of value 'ABCD'
     """
-    if not valid_input:
+    if not valid_input(skus):
         return -1
     
     items = {
