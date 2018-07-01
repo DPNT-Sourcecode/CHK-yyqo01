@@ -199,6 +199,18 @@ def get_group_savings(items, num):
     return val - 45 if val > 0 else 0
 
 
+def get_group_discount(items, item, offer):
+    amount = 0
+    group_items = _get_most_valuable_group_items(items, 3)
+
+    if len(group_items) == 3:
+        amount += 45
+        for item in group_items:
+            items[item] -= 1
+
+    return amount
+
+
 def discount_offer(items, item, offer):
     """
     Add discounted items value and remove them once added
@@ -249,7 +261,7 @@ def calculate_special_offers(items, total):
         return sorted(offers, key=lambda x: x['saving'], reverse=True)
     
     # Get offers largest to smallest savings and apply them
-    #import pdb;pdb.set_trace()
+    import pdb;pdb.set_trace()
     offers = sort_offers(items, get_special_offers(items))
     while offers:
         offer = offers[0]
@@ -257,6 +269,8 @@ def calculate_special_offers(items, total):
         if offer.get('type', '') == 'discount':
             total += discount_offer(items, item, offer)
         if offer.get('type', '') == 'free':
+            total += get_free_offer(items, item, offer)
+        if offer.get('type', '') == 'group_discount':
             total += get_free_offer(items, item, offer)
         offers.pop(0)
         # Recalculate offers to update group offers
