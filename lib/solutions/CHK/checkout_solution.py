@@ -189,12 +189,12 @@ def _get_most_valuable_group_items(items, num):
     group_items = [(key, value) for key, value in items.iteritems() 
         if key in group_item_keys and value > 0]
     
-    return sorted(group_items, key=lambda x:SKU[x[0]], reverse=True)[num:]
+    return sorted(group_items, key=lambda x:SKU[x[0]], reverse=True)[:num]
 
 
 def get_group_value(items, num):
     group_items = _get_most_valuable_group_items(items, num)
-    return sum([x[1] for x in group_items])
+    return sum([x[1] * SKU[x[0]] for x in group_items])
 
 
 def get_group_savings(items, num):
