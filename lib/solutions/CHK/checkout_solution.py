@@ -144,8 +144,8 @@ def get_special_offers(items):
             'target': 'X',
             'num': 3,
             'type': 'group_discount',
-            'value': get_group_value(items),
-            'saving': get_group_savings(items)
+            'value': get_group_value(items, 3),
+            'saving': get_group_savings(items, 3)
         }
     ]
 
@@ -170,7 +170,7 @@ def _get_most_valuable_group_items(items, num):
 
 
 def get_group_value(items):
-    pass
+    
 
 
 def get_group_savings(items):
