@@ -1,4 +1,3 @@
-# encoding: utf-8
 
 # Stock keeping units
 SKU = {
