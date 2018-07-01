@@ -156,6 +156,16 @@ def get_special_offers(items):
     ]
 
 
+def update_special_offers(items, offers): 
+    group_value = get_group_value(items, 3)
+    group_savings = get_group_savings(items, 3)
+
+    for offer in offers:
+        if offer['type'] == 'group_discount':
+            offer['value'] = group_value
+            offer['saving'] = group_savings
+
+
 def valid_input(chars):
     """
     Check input is of type string and limited to characters:
@@ -233,12 +243,12 @@ def calculate_special_offers(items, total):
     """
     Add special offers to total and remove items in offers
     """
-    def sort_offers(items):
-        return sorted(get_special_offers(items), key=lambda x: x['saving'], reverse=True)
+    def sort_offers(items, offers):
+        return sorted(offers, key=lambda x: x['saving'], reverse=True)
     
     # Get offers largest to smallest savings and apply them
     #import pdb;pdb.set_trace()
-    offers = sort_offers(items)
+    offers = sort_offers(items, get_special_offers(items))
     while offers:
         offer = offers[0]
         item = offer['target']
@@ -248,7 +258,7 @@ def calculate_special_offers(items, total):
             total += get_free_offer(items, item, offer)
         offers.pop(0)
         # Recalculate offers to update group offers
-        offers = sort_offers(items)
+        offers = sort_offers(items, update_special_offers(items, offers))
     
     return total
 
