@@ -172,7 +172,9 @@ def valid_input(chars):
 
 
 def _get_most_valuable_group_items(items, num):
-    return sorted(items.items(), key=operator.itemgetter(1))[num:]
+    group_item_keys = ['S', 'T', 'X', 'Y', 'Z']
+    group_items = dict((key, value) for key, value in items.iteritems() if key in group_item_keys)
+    return sorted(group_items.items(), key=operator.itemgetter(1), reverse=True)[num:]
 
 
 def get_group_value(items, num):
@@ -181,7 +183,8 @@ def get_group_value(items, num):
 
 
 def get_group_savings(items, num):
-    return get_group_value(items, num) - 45
+    val = get_group_value(items, num)
+    return val - 45 if val > 0 else 0
 
 
 def discount_offer(items, item, offer):
@@ -267,8 +270,6 @@ def checkout(skus):
     items = {
         key: 0 for key in SKU.keys()
     }
-
-    update_special_offers(items)
 
     # Calculate skus found
     for char in skus:
