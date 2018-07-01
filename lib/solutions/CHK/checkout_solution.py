@@ -33,8 +33,17 @@ SKU = {
 
 SPECIAL_OFFERS = None
 
-def get_special_offers(items): 
-    return [
+def update_special_offers(items): 
+    """
+    Update global special offers data horrible hack needs to be refactored once
+    working
+    """
+    global SPECIAL_OFFERS
+
+    group_value = get_group_value(items, 3)
+    group_savings = get_group_savings(items, 3)
+
+    SPECIAL_OFFERS = [
         {
             'target': 'A',
             'num': 3,
@@ -144,8 +153,8 @@ def get_special_offers(items):
             'target': 'X',
             'num': 3,
             'type': 'group_discount',
-            'value': get_group_value(items, 3),
-            'saving': get_group_savings(items, 3)
+            'value': group_value,
+            'saving': group_savings
         }
     ]
 
@@ -169,16 +178,13 @@ def _get_most_valuable_group_items(items, num):
     return sorted(items.items(), key=operator.itemgetter(1))[num:]
 
 
-def get_group_value(items):
-    
+def get_group_value(items, num):
+    group_items = _get_most_valuable_group_items(items, num)
+    return sum([x[1] for x in group_items])
 
 
-def get_group_savings(items):
-    pass
-
-
-def group_discount(items, item, offer):
-    pass
+def get_group_savings(items, num):
+    return get_group_value(items, num) - 45
 
 
 def discount_offer(items, item, offer):
@@ -256,9 +262,7 @@ def checkout(skus):
         key: 0 for key in SKU.keys()
     }
 
-    # TODO: refactor into a class
-    global SPECIAL_OFFERS
-    SPECIAL_OFFERS = get_special_offers(items)
+    update_special_offers(items)
 
     # Calculate skus found
     for char in skus:
