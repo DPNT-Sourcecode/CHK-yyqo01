@@ -115,6 +115,13 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(
             checkout_solution.checkout(""), 
             0)
+    
+    @parameterized.expand([
+        ('XXX', 45),
+    ])
+    def test_chk_any_3(self, skus, value):
+        self.assertEqual(
+            checkout_solution.checkout(skus), value)
 
 
 if __name__ == '__main__':

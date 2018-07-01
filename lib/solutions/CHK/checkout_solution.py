@@ -164,6 +164,8 @@ def update_special_offers(items, offers):
         if offer['type'] == 'group_discount':
             offer['value'] = group_value
             offer['saving'] = group_savings
+    
+    return offers
 
 
 def valid_input(chars):
