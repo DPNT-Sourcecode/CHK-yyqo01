@@ -42,6 +42,12 @@ class TestSum(unittest.TestCase):
             checkout_solution.checkout('AAAAAAAABBCDEE'), 
             475)
     
+    @parameterized.expand([
+        ('FFF', 20),
+        ('FF', 20), 
+        ('FFFF', 30), 
+        ('FFFFFF', 40)
+    ])
     def test_chk_get_free_same_item(self):
         self.assertEqual(
             checkout_solution.checkout('FFF'), 
