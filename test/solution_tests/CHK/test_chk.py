@@ -33,6 +33,12 @@ class TestSum(unittest.TestCase):
             checkout_solution.checkout('AAAAAAAABBCDEE'), 
             460)
     
+    def test_chk_get_free_multiple_offers(self):
+        import pdb;pdb.set_trace()
+        self.assertEqual(
+            checkout_solution.checkout('AAAAAAAABBCDEE'), 
+            460)
+    
     @parameterized.expand([
         ('A', 50),
         ('B', 30), 

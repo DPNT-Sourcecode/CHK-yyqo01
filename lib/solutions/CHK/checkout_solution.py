@@ -9,7 +9,7 @@ SKU = {
     'E': 40
 }
 
-SPECIAL_OFFERS = {
+SPECIAL_OFFERS = [
     {
         'target': 'A',
         'num': 3,
@@ -38,7 +38,7 @@ SPECIAL_OFFERS = {
         'value': 'B',
         'saving': SKU['B']
     }
-}
+]
 
 
 def valid_input(chars):
@@ -77,6 +77,7 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
+        import pdb;pdb.set_trace()
         free_items = items[item] / offer['num']
         free_item_key = offer['value']
         if items[free_item_key] > 0:
