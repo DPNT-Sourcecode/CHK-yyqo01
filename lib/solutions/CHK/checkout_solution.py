@@ -82,11 +82,23 @@ def get_free_offer(items, item, offer):
     """
     Remove items that have been offered as free for another deal
     """
+    def get_required_offer_items(item, offer):
+        """
+        If the deal is on the same item we need one more item in the 
+        basket for it to be valid
+        """
+        required = offer['num'] 
+        if free_item_key == item:
+            required += 1
+        return required
+    
     amount = 0
 
     if items[item] >= offer['num']:
-        free_items = items[item] / (offer['num'] + 1)
         free_item_key = offer['value']
+        required_items = get_required_offer_items(item, offer)
+        free_items = items[item] / required_items
+        # Remove free items from items dict
         if items[free_item_key] > 0:
             reduce_by = min(items[free_item_key], free_items)
             items[free_item_key] -= reduce_by
@@ -98,7 +110,7 @@ def calculate_special_offers(items, total):
     """
     Add special offers to total and remove items in offers
     """
-    # Get offers largest to smallest and apply them
+    # Get offers largest to smallest savings and apply them
     for offer in sorted(SPECIAL_OFFERS, key=lambda x: x['saving'], reverse=True):
         item = offer['target']
         if offer.get('type', '') == 'discount':
@@ -133,6 +145,7 @@ def checkout(skus):
         
     total = calculate_special_offers(items, total)
     
+    # Add remaining items
     for item in items:
         total += items[item] * SKU[item]
     
