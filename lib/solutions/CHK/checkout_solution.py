@@ -32,7 +32,7 @@ SPECIAL_OFFERS = {
     'E': [
         {
             'num': 2,
-            'type': 'BOGOF',
+            'type': 'free',
             'value': 'E'
         }
     ]
@@ -54,13 +54,33 @@ def valid_input(chars):
     return True
 
 
+def discount_offer(items, item, offer):
+    amount = 0
+
+    if items[item] >= offer['num']:
+        offer_count = items[item] / offer['num']
+        items[item] = items[item] % offer['num']
+        amount = offer_count * offer['amount']
+    
+    return amount
+
+
+def get_free_offer(items, item, offer):
+    if items[item] >= offer['num']:
+        free_item = items[item] / offer['num']
+        items[free_item] += 1
+
 def calculate_special_offers(items, total):
-     # Add special offers to total and remove items in offers
+    """
+    Add special offers to total and remove items in offers
+    """
     for item in SPECIAL_OFFERS:
-        if items[item] >= SPECIAL_OFFERS[item]['num']:
-            offer_count = items[item] / SPECIAL_OFFERS[item]['num']
-            items[item] = items[item] % SPECIAL_OFFERS[item]['num']
-            total += offer_count * SPECIAL_OFFERS[item]['amount']
+        # Get offers largest to smallest and apply them
+        for offer in sorted(item, key=lambda x: x['num'], reverse=True):
+            if offer.get('type', '') == 'discount':
+                total += discount_offer(items, item, offer)
+            if offer.get('type', '') == 'free':
+                get_free_offer(items, item, offer)
     
     return total
 
