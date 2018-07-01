@@ -20,7 +20,8 @@ class TestCheckout(unittest.TestCase):
     @parameterized.expand([
         ('HHHHH', 45),
         ('HHHHHHHHH', 85),
-        ('AAABBCD', 210)
+        ('AAABBCD', 210),
+        ('KK', 150)
     ])
     def test_chk_special_offers(self, skus, value):
         self.assertEqual(
@@ -28,21 +29,19 @@ class TestCheckout(unittest.TestCase):
     
     @parameterized.expand([
         ('AAAAAAAABBCDE', 450),
-        ('AAAAAAAABBCDEHHHHHHHH', 535)
+        ('AAAAAAAABBCDEHHHHHHHH', 525)
     ])
     def test_chk_multiple_special_offers(self, skus, value):
-        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout(skus), value)
     
-    def test_test(self):
+    @parameterized.expand([
+        ('ABCDEE', 165),
+        ('NNNM', 120)
+    ])
+    def test_chk_get_free(self, skus, value):
         self.assertEqual(
-            checkout_solution.checkout('AAAAAAAABBCDEHHHHHHHH'), 535)
-    
-    def test_chk_get_free(self):
-        self.assertEqual(
-            checkout_solution.checkout('ABCDEE'), 
-            165)
+            checkout_solution.checkout(skus, value))
     
     def test_chk_get_2_free(self):
         self.assertEqual(
