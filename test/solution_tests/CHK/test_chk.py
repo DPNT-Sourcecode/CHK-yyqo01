@@ -21,7 +21,9 @@ class TestCheckout(unittest.TestCase):
         ('HHHHH', 45),
         ('HHHHHHHHH', 85),
         ('AAABBCD', 210),
-        ('KK', 150)
+        ('KK', 150),
+        ('PPPPP', 200),
+        ('QQQ', 80)
     ])
     def test_chk_special_offers(self, skus, value):
         self.assertEqual(
@@ -37,11 +39,12 @@ class TestCheckout(unittest.TestCase):
     
     @parameterized.expand([
         ('ABCDEE', 165),
-        ('NNNM', 120)
+        ('NNNM', 120),
+        ('RRRQ', 150)
     ])
     def test_chk_get_free(self, skus, value):
         self.assertEqual(
-            checkout_solution.checkout(skus, value))
+            checkout_solution.checkout(skus), value)
     
     def test_chk_get_2_free(self):
         self.assertEqual(
@@ -57,7 +60,11 @@ class TestCheckout(unittest.TestCase):
         ('FFF', 20),
         ('FF', 20), 
         ('FFFF', 30), 
-        ('FFFFFF', 40)
+        ('FFFFFF', 40),
+        ('UUU', 120),
+        ('UUUU', 120),
+        ('UUUUUU', 200),
+        ('UUUUUUUU', 240),
     ])
     def test_chk_get_free_same_item(self, skus, value):
         self.assertEqual(
