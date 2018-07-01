@@ -29,7 +29,6 @@ class TestSum(unittest.TestCase):
         ('D', 15)
     ])
     def test_chk_single_values(self, char, value):
-        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout(char), 
             value)
