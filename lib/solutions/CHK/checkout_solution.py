@@ -52,7 +52,7 @@ SPECIAL_OFFERS = [
 def valid_input(chars):
     """
     Check input is of type string and limited to characters:
-    A B C D E
+    in the SKU global
     """
     if not isinstance(chars, basestring):
         return False
@@ -123,11 +123,7 @@ def checkout(skus):
     
     total = 0
     items = {
-        'A': 0,
-        'B': 0,
-        'C': 0,
-        'D': 0,
-        'E': 0
+        key: 0 for key in SKU.keys()
     }
 
     # Calculate skus found
