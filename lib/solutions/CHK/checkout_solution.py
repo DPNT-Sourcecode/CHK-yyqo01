@@ -232,7 +232,9 @@ def calculate_special_offers(items, total):
     """
     def sort_offers(items):
         return sorted(get_special_offers(items), key=lambda x: x['saving'], reverse=True)
+    
     # Get offers largest to smallest savings and apply them
+    import pdb;pdb.set_trace()
     offers = sort_offers(items)
     while offers:
         offer = offers[0]
@@ -242,6 +244,7 @@ def calculate_special_offers(items, total):
         if offer.get('type', '') == 'free':
             total += get_free_offer(items, item, offer)
         offers.shift()
+        # Recalculate offers to update group offers
         offers = sort_offers(items)
     
     return total
