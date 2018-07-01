@@ -11,8 +11,7 @@ class TestSum(unittest.TestCase):
         ('e',),
         (2,), 
         ('&',), 
-        ('£',),
-        ('',)
+        ('£',)
     ])
     def test_invalid_input(self, fail_char):
         self.assertEqual(
@@ -24,15 +23,21 @@ class TestSum(unittest.TestCase):
             210)
     
     @parameterized.expand([
-        ('A',),
-        ('B',), 
-        ('C',), 
-        ('D',)
+        ('A', 50),
+        ('B', 30), 
+        ('C', 20), 
+        ('D', 15)
     ])
-    def test_chk_single_values(self, char):
+    def test_chk_single_values(self, char, value):
         self.assertEqual(
-            checkout_solution.checkout('AAABBCD'), 
-            210)
+            checkout_solution.checkout(char), 
+            value)
+    
+    def test_chk_empty_string(self):
+        import pdb;pdb.set_trace()
+        self.assertEqual(
+            checkout_solution.checkout(''), 
+            0)
 
 
 if __name__ == '__main__':
