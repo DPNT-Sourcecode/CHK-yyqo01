@@ -185,7 +185,6 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
-        import pdb;pdb.set_trace()
         free_item_key = offer['value']
         required_items = get_required_offer_items(item, offer)
         free_items = items[item] / required_items
@@ -204,6 +203,8 @@ def calculate_special_offers(items, total):
     # Get offers largest to smallest savings and apply them
     for offer in sorted(SPECIAL_OFFERS, key=lambda x: x['saving'], reverse=True):
         item = offer['target']
+        if item == 'H':
+            import pdb;pdb.set_trace()
         if offer.get('type', '') == 'discount':
             total += discount_offer(items, item, offer)
         if offer.get('type', '') == 'free':
