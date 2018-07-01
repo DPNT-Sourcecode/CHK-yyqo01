@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 import unittest
-from nose_parameterized import parameterized
+from parameterized import parameterized
 
 from solutions.CHK import checkout_solution
 
@@ -29,13 +29,14 @@ class TestSum(unittest.TestCase):
         ('D', 15)
     ])
     def test_chk_single_values(self, char, value):
+        import pdb;pdb.set_trace()
         self.assertEqual(
             checkout_solution.checkout(char), 
             value)
     
     def test_chk_empty_string(self):
         self.assertEqual(
-            checkout_solution.checkout(''), 
+            checkout_solution.checkout(""), 
             0)
 
 
