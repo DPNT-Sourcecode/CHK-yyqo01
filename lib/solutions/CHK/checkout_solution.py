@@ -1,4 +1,5 @@
 # encoding: utf-8
+import operator
 
 # Stock keeping units
 SKU = {
@@ -162,6 +163,10 @@ def valid_input(chars):
             return False
 
     return True
+
+
+def _get_most_valuable_group_items(items, num):
+    return sorted(items.items(), key=operator.itemgetter(1))[num:]
 
 
 def get_group_value(items):
