@@ -122,6 +122,7 @@ def checkout(skus):
         return -1
     
     total = 0
+    # Create empty dict of all SKU values
     items = {
         key: 0 for key in SKU.keys()
     }

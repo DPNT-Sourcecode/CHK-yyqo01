@@ -47,6 +47,11 @@ class TestSum(unittest.TestCase):
             checkout_solution.checkout('FFF'), 
             20)
     
+    def test_chk_get_free_multiple_offers_same_item(self):
+        self.assertEqual(
+            checkout_solution.checkout('AAAAAAAABBCDEEFFF'), 
+            495)
+    
     @parameterized.expand([
         ('A', 50),
         ('B', 30), 
