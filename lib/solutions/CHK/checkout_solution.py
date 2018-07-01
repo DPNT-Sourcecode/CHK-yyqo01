@@ -31,15 +31,12 @@ SKU = {
     'Z': 50
 }
 
-SPECIAL_OFFERS = None
 
-def update_special_offers(items): 
+def get_special_offers(items): 
     """
     Update global special offers data horrible hack needs to be refactored once
     working
     """
-    global SPECIAL_OFFERS
-
     group_value = get_group_value(items, 3)
     group_savings = get_group_savings(items, 3)
 
@@ -233,13 +230,19 @@ def calculate_special_offers(items, total):
     """
     Add special offers to total and remove items in offers
     """
+    def sort_offers(items):
+        return sorted(get_special_offers(items), key=lambda x: x['saving'], reverse=True)
     # Get offers largest to smallest savings and apply them
-    for offer in sorted(SPECIAL_OFFERS, key=lambda x: x['saving'], reverse=True):
+    offers = sort_offers(items)
+    while offers:
+        offer = offers[0]
         item = offer['target']
         if offer.get('type', '') == 'discount':
             total += discount_offer(items, item, offer)
         if offer.get('type', '') == 'free':
             total += get_free_offer(items, item, offer)
+        offers.shift()
+        offers = sort_offers(items)
     
     return total
 
