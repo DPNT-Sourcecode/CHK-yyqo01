@@ -6,7 +6,7 @@ from parameterized import parameterized
 from solutions.CHK import checkout_solution
 
 
-class TestSum(unittest.TestCase):
+class TestCheckout(unittest.TestCase):
     @parameterized.expand([
         ('e',),
         (2,), 
