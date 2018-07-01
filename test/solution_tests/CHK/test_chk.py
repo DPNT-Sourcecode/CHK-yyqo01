@@ -23,7 +23,9 @@ class TestCheckout(unittest.TestCase):
         ('AAABBCD', 210),
         ('KK', 150),
         ('PPPPP', 200),
-        ('QQQ', 80)
+        ('QQQ', 80),
+        ('VV', 90),
+        ('VVV', 130)
     ])
     def test_chk_special_offers(self, skus, value):
         self.assertEqual(
