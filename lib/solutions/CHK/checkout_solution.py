@@ -185,7 +185,7 @@ def valid_input(chars):
 
 def _get_most_valuable_group_items(items, num):
     group_item_keys = ['S', 'T', 'X', 'Y', 'Z']
-    group_items = dict((key, value) for key, value in items.iteritems() if key in group_item_keys)
+    group_items = dict((key, value) for key, value in items.iteritems() if key in group_item_keys and value > 0)
     return sorted(group_items.items(), key=operator.itemgetter(1), reverse=True)[num:]
 
 
