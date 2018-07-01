@@ -26,9 +26,9 @@ SKU = {
     'U': 40,
     'V': 50,
     'W': 20,
-    'X': 90,
-    'Y': 10,
-    'Z': 50
+    'X': 17,
+    'Y': 20,
+    'Z': 21
 }
 
 
@@ -204,14 +204,13 @@ def get_group_savings(items, num):
 
 
 def get_group_discount(items, item, offer):
-    import pdb;pdb.set_trace()
     amount = 0
     group_items = _get_most_valuable_group_items(items, 3)
 
     if len(group_items) == 3:
         amount += 45
         for item in group_items:
-            items[item] -= 1
+            items[item[0]] -= 1
 
     return amount
 
@@ -247,7 +246,6 @@ def get_free_offer(items, item, offer):
     amount = 0
 
     if items[item] >= offer['num']:
-        import pdb;pdb.set_trace()
         free_item_key = offer['value']
         required_items = get_required_offer_items(item, offer)
         free_items = items[item] / required_items
@@ -267,7 +265,6 @@ def calculate_special_offers(items, total):
         return sorted(offers, key=lambda x: x['saving'], reverse=True)
     
     # Get offers largest to smallest savings and apply them
-    import pdb;pdb.set_trace()
     offers = sort_offers(items, get_special_offers(items))
     while offers:
         offer = offers[0]

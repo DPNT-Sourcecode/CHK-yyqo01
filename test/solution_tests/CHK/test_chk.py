@@ -116,9 +116,10 @@ class TestCheckout(unittest.TestCase):
             checkout_solution.checkout(""), 
             0)
     
-    # @parameterized.expand([
-    #     (, 45),
-    # ])
+    @parameterized.expand([
+        ('XXX', 45),
+        ('XYZ', 45),
+    ])
     def test_chk_any_3(self):
         self.assertEqual(
             checkout_solution.checkout('XXX'), 45)
